@@ -4,6 +4,7 @@ import Register from "./Pages/Register";
 import HomePage from "./Pages/HomePage";
 import { Routes, Route } from 'react-router-dom'
 import NewTicket from "./Pages/NewTicket";
+import Ticket from "./Pages/Ticket";
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path="/register" element={<Register />}/>
         <Route path="/login" element={<Login />}/>
         <Route path="/newticket" element={<NewTicket />}/>
+        <Route path="/tickets" element={<Ticket />}/>
         
       </Routes>
     </div>
