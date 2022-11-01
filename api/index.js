@@ -28,7 +28,7 @@ app.use("/api/users", userRoute);
 app.use("/api/tickets", ticketRoute);
 
 
-app.listen(process.env.PORT, () => {
+app.listen(5000, () => {
   console.log("Backend server is running!");
 });
 

@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import UserContext from "../Context/UserContext";
 import { useContext } from "react";
+import {FaUserAlt} from 'react-icons/fa'
 
 function Register() {
   const { setCurrentUser } = useContext(UserContext);
@@ -11,7 +12,7 @@ function Register() {
     email: "",
     password: "",
   });
-  
+
   const handleChange = (e) => {
     setFormData((prev) => ({
       ...prev,
@@ -23,8 +24,12 @@ function Register() {
     e.preventDefault();
     try {
       const res = await axios.post("/api/users/register", formData);
-      localStorage.setItem("User", JSON.stringify(res.data));
-      setCurrentUser(res.data);
+
+      if (res) {
+        localStorage.setItem("User", JSON.stringify(res.data));
+        setCurrentUser(JSON.parse(localStorage.getItem("User")))
+      }
+
     } catch (error) {
       console.log(error.response);
     }
@@ -32,7 +37,7 @@ function Register() {
 
   return (
     <div className="flex flex-col justify-center items-center mt-4 p-4">
-      <h1 className="font-bold text-3xl">Register</h1>
+      <h1 className="flex items-center justify-center gap-2 font-bold text-3xl mb-3"><FaUserAlt/>Register</h1>
       <h1 className="font-bold text-xl text-gray-400">
         Please create an account
       </h1>

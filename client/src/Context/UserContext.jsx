@@ -1,5 +1,4 @@
 import React, { createContext, useState } from "react";
-import { useEffect } from "react";
 
 export const UserContext = createContext(null);
 

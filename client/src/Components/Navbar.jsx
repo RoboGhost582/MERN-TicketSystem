@@ -1,17 +1,22 @@
 import React from 'react'
-import { useContext } from "react";
-import UserContext from "../Context/UserContext";
+import { Link } from 'react-router-dom'
+import {FaUserAlt, FaSignInAlt} from 'react-icons/fa'
 
 
 function Navbar() {
-  const { currentUser } = useContext(UserContext);
   return (
     <div className='flex p-4 justify-between items-center border-b-2'>
+      <Link to={"/"}>
         <h1 className='font-bold text-lg'>Suppot Desk</h1>
-        <div className='flex gap-3 font-bold'>
-            <p>Login</p> 
-            <p>Register</p>
-        </div>
+      </Link>
+      <div className='flex gap-3 font-bold'>
+        <Link to={"/login"}>
+          <p className='flex items-center justify-center gap-1'> <FaSignInAlt/> Login</p>
+        </Link>
+        <Link to={"/register"}>
+        <p className='flex items-center justify-center gap-1'> <FaUserAlt/> Register</p>
+        </Link>
+      </div>
     </div>
   )
 }
