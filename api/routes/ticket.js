@@ -18,7 +18,7 @@ router.get("/", async (req, res) => {
   }
 }); 
 
-//create ticket 
+//create ticket  
 router.post("/create", async (req, res) => {
     const {user, product, desc, status }  = req.body
   
@@ -40,4 +40,4 @@ router.post("/create", async (req, res) => {
 
 
 
-module.exports = router;
+module.exports = router; 
