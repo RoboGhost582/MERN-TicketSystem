@@ -3,7 +3,7 @@ const User = require("../models/Users");
 const router = require("express").Router();
 
 
-//get all ticket from a person 
+//get all ticket for a person 
 router.get("/", async (req, res) => {
   const {user}  = req.body 
 
