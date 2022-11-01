@@ -6,8 +6,9 @@ import { useContext } from "react";
 
 
 function NewTicket() {
-    const { setCurrentUser } = useContext(UserContext);
+    const { currentUser } = useContext(UserContext);
     const [formData, setFormData] = useState({
+        userid: currentUser._id,
         name: "",
         email: "",
         product: "",
@@ -24,11 +25,11 @@ function NewTicket() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post("/api/users/register", formData);
+            const res = await axios.post("/api/tickets/create", formData);
 
             if (res) {
-                localStorage.setItem("User", JSON.stringify(res.data));
-                setCurrentUser(JSON.parse(localStorage.getItem("User")))
+                localStorage.setItem("Ticket", JSON.stringify(res.data));
+                //setCurrentUser(JSON.parse(localStorage.getItem("User")))
             }
 
         } catch (error) {

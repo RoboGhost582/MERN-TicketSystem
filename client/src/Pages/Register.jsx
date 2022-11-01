@@ -6,7 +6,7 @@ import { useContext } from "react";
 import {FaUserAlt} from 'react-icons/fa'
 
 function Register() {
-  const { setCurrentUser } = useContext(UserContext);
+  const { setCurrentUser, setUserStatus } = useContext(UserContext);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -21,13 +21,14 @@ function Register() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    //e.preventDefault();
     try {
       const res = await axios.post("/api/users/register", formData);
 
       if (res) {
         localStorage.setItem("User", JSON.stringify(res.data));
         setCurrentUser(JSON.parse(localStorage.getItem("User")))
+        setUserStatus(true)
       }
 
     } catch (error) {

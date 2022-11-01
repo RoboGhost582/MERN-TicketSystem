@@ -20,13 +20,15 @@ router.get("/", async (req, res) => {
 
 //create ticket  
 router.post("/create", async (req, res) => {
-    const {user, product, desc, status }  = req.body
+    const {userid, name, email, product, desc, status }  = req.body
   
-    const userExist = await User.findById(user)
+    const userExist = await User.findById(userid)
   
     if(userExist){
       const newTicket = await Ticket.create({
-        user,
+        userid,
+        name,
+        email,
         product,
         desc,
         status

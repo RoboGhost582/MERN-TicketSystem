@@ -6,7 +6,7 @@ import { useContext } from "react";
 import {FaSignInAlt} from 'react-icons/fa'
 
 function Login() {
-  const { setCurrentUser } = useContext(UserContext);
+  const { setCurrentUser, setUserStatus } = useContext(UserContext);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -21,12 +21,13 @@ function Login() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    //e.preventDefault();
     try {
       const res = await axios.post("/api/users/login", formData);
       if (res) {
         localStorage.setItem("User", JSON.stringify(res.data));
         setCurrentUser(JSON.parse(localStorage.getItem("User")))
+        setUserStatus(true)
       }
     } catch (error) {
       console.log(error.response);
