@@ -16,7 +16,10 @@ function TableItems({item}) {
                     {item.product}
                 </td>
                 <td class="py-4 px-6">
-                    <p className='border-2 bg-green-500 px-5 rounded-full text-white text-center' >{item.status}</p>
+                    {item.status !== "closed" ? (<p className='border-2 bg-green-500 px-5 rounded-full text-white text-center' >{item.status}</p>) 
+                    :
+                    (<p className='border-2 bg-red-500 px-5 rounded-full text-white text-center' >{item.status}</p>)}
+                    
                 </td>
                 <td class="py-4 px-6">
                     <Link to={`/tickets/${item._id}`}>

@@ -4,9 +4,10 @@ import axios from "axios";
 import UserContext from "../Context/UserContext";
 import { useContext } from "react";
 import { useEffect } from "react";
-import TableItems from "../Components/TableItems";
+import { useNavigate } from "react-router-dom";
 
 function SingleTicket() {
+  const navigate = useNavigate()
   const { singleTicket, setSingleTicket, currentUser } =
     useContext(UserContext);
 
@@ -26,12 +27,14 @@ function SingleTicket() {
   let { id } = useParams();
 
   const onClickClose = async () => {
-    return await axios.put(`/api/tickets/${id}/update`, { status: "closed" });
+     await axios.put(`/api/tickets/${id}/update`, 
+    {
+      user: singleTicket.userid,
+      status: "closed",
+    });
+    navigate("/tickets")
   };
 
-  const onClickOpen = async () => {
-    return await axios.put(`/api/tickets/${id}/update`, { status: "open" });
-  };
 
   const closed = singleTicket.status;
 
@@ -50,13 +53,11 @@ function SingleTicket() {
         <div>
           {closed === "closed" ? (
             <p className="border-2 bg-red-500 px-5 rounded-full text-white text-center">
-              {" "}
-              {singleTicket.status}{" "}
+              {singleTicket.status}
             </p>
           ) : (
             <p className="border-2 bg-green-500 px-5 rounded-full text-white text-center">
-              {" "}
-              {singleTicket.status}{" "}
+              {singleTicket.status}
             </p>
           )}
         </div>
@@ -65,21 +66,12 @@ function SingleTicket() {
         <p className="font-bold text-md mb-1">Description of Issue: </p>
         <p className> {singleTicket.desc} </p>
       </div>
-      {closed === "closed" ? (
-        <button
-          onClick={onClickClose}
-          className="mt-4 bg-green-500 w-7/12 rounded"
-        >
-          Open
-        </button>
-      ) : (
-        <button
-          onClick={onClickOpen}
-          className="mt-4 bg-red-500 w-7/12 rounded"
-        >
+      {closed === "open" && (
+      < button onClick={onClickClose} className="mt-4 bg-red-500 w-7/12 rounded">
           Close
         </button>
-      )}
+      )
+    }
     </div>
   );
 }
