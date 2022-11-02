@@ -43,12 +43,25 @@ router.post("/:id", async (req, res) => {
   const { user } = req.body;
 
   const userExist = await User.findById(user);
+  
+  if (!userExist) {
+    res.status(404)
+    throw new Error('User Not Found')
+  }
+   
+  const ticket = await Ticket.findById(id);
 
-  if (userExist) {
-    const ticket = await Ticket.findById(id);
-    res.status(200).json(ticket);
-  } else {
-    res.status(401).send("Ticket Not Found for this User");
+  if (!ticket) {
+    res.status(404)
+    throw new Error('Ticket Not Found')
+  }
+
+  if (ticket.userid.toString() === user) {
+    res.status(200).json(ticket); 
+  }
+  else{
+    res.status(404)
+    throw new Error('Ticket does not belong this user')
   }
 });
 
