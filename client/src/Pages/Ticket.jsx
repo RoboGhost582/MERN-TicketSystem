@@ -3,21 +3,25 @@ import TableItems from "../Components/TableItems";
 import UserContext from "../Context/UserContext";
 import { useContext } from "react";
 import { useEffect } from "react";
-import axios from "axios";
+import axios from 'axios'
 
 function Ticket() {
-  const { currentUser, setTickets, tickets } = useContext(UserContext);  
-  
+  const { currentUser, setTickets, tickets } = useContext(UserContext);
+
+  const formData = { user: currentUser._id };
+
+  //Fetch All Tickets
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.post("/api/tickets", {user : currentUser._id});
+      const res = await axios.post("/api/tickets", formData);
       if (res) {
         console.log(res.data);
         setTickets(res.data);
-      } 
+      }
     };
     fetchData();
   },[]);
+  
 
   return (
     <div className="flex flex-col items-center justify-center p-4">
@@ -25,7 +29,7 @@ function Ticket() {
         <button className=" border-2 w-[150px] h-[50px] rounded-xl text-center my-4">
           Back
         </button>
-      </div> 
+      </div>
 
       <h1 className="my-4 font-bold text-2xl">Tickets</h1>
       <div>
@@ -46,9 +50,7 @@ function Ticket() {
               </tr>
             </thead>
             {tickets.map((item) => {
-                return(
-                    <TableItems item = {item} />
-                )
+              return <TableItems item={item} />;
             })}
           </table>
         </div>

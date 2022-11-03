@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 
 function TableItems({item}) {
+    
     const {id} = useParams()
     
     return (

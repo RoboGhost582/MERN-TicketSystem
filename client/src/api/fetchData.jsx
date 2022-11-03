@@ -1,34 +1,17 @@
+import axios from "axios";
+
+export default fetchData;
+
 //Login Data
-const loginData = async (formData) => {
-  const res = await axios.post("/api/users/login", formData);
-};
+export const login = (data) =>
+  axios.post("/api/users/login", data).then((res) => res.data);
+//Register
+export const register = (data) =>
+axios.post("/api/users/register", data).then((res) => res.data);
 
-//RegisterData
-const registerData = async (formData) => {
-  const res = await axios.post("/api/users/register", formData);
-};
+export const createTicket = (data) =>
+axios.post("/api/tickets/create", data).then((res) => res.data);
 
-//Create Ticket
-const createTicket = async (formData) => {
-    const res = await axios.post("/api/tickets/create", formData);
-};
-
-//All Tickets for a user
-const fetchData = async () => {
-  const res = await axios.post("/api/tickets", { user: currentUser._id });
-};
-//Fetch Single based off ID
-const fetchSingleTicket = async (id) => {
-  const res = await axios.post(`/api/tickets/${id}`, { user: currentUser._id });
-};
-
-//Close Ticket
-const onClickClose = async () => {
-    await axios.put(`/api/tickets/${id}/update`, 
-   {
-     user: singleTicket.userid,
-     status: "closed",
-   });
-}
-
+export const fetchAllTickets = (data) =>
+axios.post("/api/tickets", data).then((res) => res.data);
 
