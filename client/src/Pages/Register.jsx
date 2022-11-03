@@ -4,8 +4,10 @@ import axios from "axios";
 import UserContext from "../Context/UserContext";
 import { useContext } from "react";
 import {FaUserAlt} from 'react-icons/fa'
+//import { useNavigate } from "react-router-dom";
 
 function Register() {
+  //const navigate = useNavigate();
   const { setCurrentUser, setUserStatus } = useContext(UserContext);
   const [formData, setFormData] = useState({
     name: "",
@@ -21,7 +23,7 @@ function Register() {
   };
 
   const handleSubmit = async (e) => {
-    //e.preventDefault();
+    e.preventDefault();
     try {
       const res = await axios.post("/api/users/register", formData);
 
@@ -29,6 +31,8 @@ function Register() {
         localStorage.setItem("User", JSON.stringify(res.data));
         setCurrentUser(JSON.parse(localStorage.getItem("User")))
         setUserStatus(true)
+        // window.location.reload();
+        // navigate("/")
       }
 
     } catch (error) {

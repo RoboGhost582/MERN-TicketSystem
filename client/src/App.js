@@ -6,18 +6,22 @@ import { Routes, Route } from "react-router-dom";
 import NewTicket from "./Pages/NewTicket";
 import Ticket from "./Pages/Ticket";
 import SingleTicket from "./Pages/SingleTicket";
+import ProtectedRoute from "./Components/ProtectedRoute";
 
 function App() {
   return (
     <div className>
       <Navbar />
       <Routes>
-        <Route path="/" element={<HomePage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/newticket" element={<NewTicket />} />
-        <Route path="/tickets" element={<Ticket />} />
-        <Route path="/tickets/:id" element={<SingleTicket />} />
+        <Route element = {<ProtectedRoute />} >
+          <Route path="/" element={<HomePage />}/>
+          <Route path="/newticket" element={<NewTicket />} />
+          <Route path="/tickets" element={<Ticket />} />
+          <Route path="/tickets/:id" element={<SingleTicket />} />
+        </Route>
+        
       </Routes>
     </div>
   );

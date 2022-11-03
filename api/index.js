@@ -9,7 +9,7 @@ const ticketRoute = require("./routes/ticket");
 
 dotenv.config();
 
-//Database connection
+//Database connection 
 mongoose.connect(
   process.env.MONGO_URL,
   { useNewUrlParser: true, useUnifiedTopology: true },
@@ -19,7 +19,7 @@ mongoose.connect(
 );
 
 //Middleware
-app.use(express.json());
+app.use(express.json()); 
 // app.use(helmet());
 // app.use(morgan("common"));
 
