@@ -3,9 +3,11 @@ import { useState } from "react";
 import axios from "axios";
 import UserContext from "../Context/UserContext";
 import { useContext } from "react";
+import { useNavigate } from 'react-router-dom';
 
 
 function NewTicket() {
+    const navigate = useNavigate()
     const { currentUser } = useContext(UserContext);
     const [formData, setFormData] = useState({
         userid: currentUser._id,
@@ -30,6 +32,7 @@ function NewTicket() {
             if (res) {
                 localStorage.setItem("Ticket", JSON.stringify(res.data));
                 //setCurrentUser(JSON.parse(localStorage.getItem("User")))
+                navigate("/tickets")
             }
 
         } catch (error) {

@@ -66,7 +66,7 @@ function SingleTicket() {
         <p className="font-bold text-md mb-1">Description of Issue: </p>
         <p className> {singleTicket.desc} </p>
       </div>
-      {closed === "open" && (
+      {closed === "open" || "new" && (
       < button onClick={onClickClose} className="mt-4 bg-red-500 w-7/12 rounded">
           Close
         </button>
